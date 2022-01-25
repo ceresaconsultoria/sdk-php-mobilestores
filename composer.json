@@ -1,0 +1,32 @@
+{
+    "name": "ceresaconsultoria/sdk-php-mobilestores",
+    "description": "SDK PHP da Api da Mobile Stores",
+    "keywords": ["api", "library", "psr-4", "mobilestores", "sdk"],
+    "homepage": "https://github.com/ceresaconsultoria/sdk-php-mobilestores",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Weslley Ceresa",
+            "email": "ceresaconsultoria@gmail.com",
+            "homepage": "https://www.ceresaconsultoria.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "guzzlehttp/guzzle": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "MobileStores\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": []
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "victorjonsson/markdowndocs": "^1.3"
+    }
+}
