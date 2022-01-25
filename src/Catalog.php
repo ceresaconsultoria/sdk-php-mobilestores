@@ -19,14 +19,36 @@ use MobileStores\Exceptions\MSException;
  */
 class Catalog extends MSController{
     
-    public function listProducts(array $data){
+    public function createProduct(array $data){
+        
+        try{
+            $response = $this->http->post("/products", array(
+                "headers" => [
+                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (Exception $ex) {
+            
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    public function listProducts(array $filters = []){
         
         try{
             $response = $this->http->get("/products", array(
                 "headers" => [
                     "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
                 ],
-                "json" => $data 
+                "query" => $filters
             ));
 
             $body = (string)$response->getBody();
