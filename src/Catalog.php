@@ -26,7 +26,7 @@ class Catalog extends MSController{
                 "headers" => [
                     "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
                 ],
-                "json" => $data
+                "json" => $data 
             ));
 
             $body = (string)$response->getBody();
