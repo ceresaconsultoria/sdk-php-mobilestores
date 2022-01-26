@@ -19,6 +19,96 @@ use MobileStores\Exceptions\MSException;
  */
 class Catalog extends MSController{
     
+    //Brands
+    
+    public function removeBrand($id){
+        
+        try{
+            $response = $this->http->delete("/brands/".$id, array(
+                "headers" => [
+                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (Exception $ex) {
+            
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    public function getBrand($id){
+        
+        try{
+            $response = $this->http->get("/brands/".$id, array(
+                "headers" => [
+                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (Exception $ex) {
+            
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    public function updateBrand($id, array $data){
+        
+        try{
+            $response = $this->http->post("/brands/".$id, array(
+                "headers" => [
+                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (Exception $ex) {
+            
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    public function createBrand(array $data){
+        
+        try{
+            $response = $this->http->post("/brands", array(
+                "headers" => [
+                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (Exception $ex) {
+            
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    //Products
+    
     public function createProduct(array $data){
         
         try{
