@@ -33,14 +33,48 @@ class Catalog extends MSController{
             $body = (string)$response->getBody();
                         
             $bodyDecoded = json_decode($body);
-            
-            if($bodyDecoded->code != 200)
-                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
-            
+                        
             return $bodyDecoded->data;
             
-        } catch (Exception $ex) {
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
             
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
             throw new MSException($ex);
         
         }
@@ -59,14 +93,48 @@ class Catalog extends MSController{
             $body = (string)$response->getBody();
                         
             $bodyDecoded = json_decode($body);
-            
-            if($bodyDecoded->code != 200)
-                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
-            
+                        
             return $bodyDecoded->data;
             
-        } catch (Exception $ex) {
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
             
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
             throw new MSException($ex);
         
         }
@@ -86,14 +154,48 @@ class Catalog extends MSController{
             $body = (string)$response->getBody();
                         
             $bodyDecoded = json_decode($body);
-            
-            if($bodyDecoded->code != 200)
-                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
-            
+                        
             return $bodyDecoded->data;
             
-        } catch (Exception $ex) {
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
             
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
             throw new MSException($ex);
         
         }
@@ -113,14 +215,48 @@ class Catalog extends MSController{
             $body = (string)$response->getBody();
                         
             $bodyDecoded = json_decode($body);
-            
-            if($bodyDecoded->code != 200)
-                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
-            
+                        
             return $bodyDecoded->data;
             
-        } catch (Exception $ex) {
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
             
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
             throw new MSException($ex);
         
         }
@@ -140,14 +276,48 @@ class Catalog extends MSController{
             $body = (string)$response->getBody();
                         
             $bodyDecoded = json_decode($body);
-            
-            if($bodyDecoded->code != 200)
-                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
-            
+                        
             return $bodyDecoded->data;
             
-        } catch (Exception $ex) {
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
             
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
             throw new MSException($ex);
         
         }
@@ -169,14 +339,48 @@ class Catalog extends MSController{
             $body = (string)$response->getBody();
                         
             $bodyDecoded = json_decode($body);
-            
-            if($bodyDecoded->code != 200)
-                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
-            
+                        
             return $bodyDecoded->data;
             
-        } catch (Exception $ex) {
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
             
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
             throw new MSException($ex);
         
         }
@@ -196,14 +400,48 @@ class Catalog extends MSController{
             $body = (string)$response->getBody();
                         
             $bodyDecoded = json_decode($body);
-            
-            if($bodyDecoded->code != 200)
-                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
-            
+                        
             return $bodyDecoded->data;
             
-        } catch (Exception $ex) {
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
             
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
             throw new MSException($ex);
         
         }
