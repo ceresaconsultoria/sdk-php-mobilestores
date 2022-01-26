@@ -44,7 +44,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -57,7 +57,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -69,7 +69,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -104,7 +104,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -117,7 +117,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -129,7 +129,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -165,7 +165,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -178,7 +178,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -190,7 +190,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -226,7 +226,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -239,7 +239,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -251,7 +251,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -287,7 +287,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -300,7 +300,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -312,7 +312,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -350,7 +350,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -363,7 +363,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -375,8 +375,8 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
-                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+
             }
             
         } catch (Exception $ex) {
@@ -411,7 +411,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -424,7 +424,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             
@@ -436,7 +436,7 @@ class Catalog extends MSController{
             
             if(isset($bodyDecoded->errorMsg)){
                 
-                throw new MSException(new Exception($bodyDecoded->errorMsg, $bodyDecoded->code));
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
                 
             }
             

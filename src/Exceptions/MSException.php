@@ -22,4 +22,31 @@ class MSException extends Exception{
         parent::__construct($message, $ex->getCode(), $ex->getPrevious());
     }
     
+    public static function fromObjectMessage($message, $code, $previous = null){
+        
+        if(is_object($message)){
+            
+            $newMessageString = [];
+            
+            foreach($message as $key => $typeError){
+                
+                foreach($typeError as $type => $errorMsg){
+                    
+                    $newMessageString[] =  $errorMsg;
+                    
+                }
+                
+            }
+            
+            return new MSException( new Exception($newMessageString, $code, $previous) );     
+        }
+        
+        if(is_string($message)){
+            
+            return new MSException( new Exception($message, $code, $previous) );     
+            
+        }
+        
+    }
+    
 }
