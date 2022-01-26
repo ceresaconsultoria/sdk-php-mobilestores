@@ -76,7 +76,7 @@ class Catalog extends MSController{
     public function listBrands(array $filters = []){
         
         try{
-            $response = $this->http->get("/brands", array(
+            $response = $this->http->get("brands", array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
