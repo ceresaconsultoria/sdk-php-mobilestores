@@ -63,6 +63,28 @@ class Catalog extends MSController{
         
     }
     
+    public function listBrands(array $filters = []){
+        
+        try{
+            $response = $this->http->get("/brands", array(
+                "headers" => [
+                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (Exception $ex) {
+            
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
     public function updateBrand($id, array $data){
         
         try{
