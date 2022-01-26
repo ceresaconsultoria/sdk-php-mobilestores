@@ -38,7 +38,7 @@ class MSException extends Exception{
                 
             }
             
-            return new MSException( new Exception($newMessageString, $code, $previous) );     
+            return new MSException( new Exception(implode("\n", $newMessageString), $code, $previous) );     
         }
         
         if(is_string($message)){
