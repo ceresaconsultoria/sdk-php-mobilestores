@@ -26,7 +26,7 @@ class Catalog extends MSController{
         try{
             $response = $this->http->delete("/brands/".$id, array(
                 "headers" => [
-                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ]
             ));
 
@@ -52,7 +52,7 @@ class Catalog extends MSController{
         try{
             $response = $this->http->get("/brands/".$id, array(
                 "headers" => [
-                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ]
             ));
 
@@ -78,7 +78,7 @@ class Catalog extends MSController{
         try{
             $response = $this->http->get("/brands", array(
                 "headers" => [
-                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
                 "query" => $filters
             ));
@@ -105,7 +105,7 @@ class Catalog extends MSController{
         try{
             $response = $this->http->post("/brands/".$id, array(
                 "headers" => [
-                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
                 "json" => $data
             ));
@@ -132,7 +132,7 @@ class Catalog extends MSController{
         try{
             $response = $this->http->post("/brands", array(
                 "headers" => [
-                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
                 "json" => $data
             ));
@@ -161,7 +161,7 @@ class Catalog extends MSController{
         try{
             $response = $this->http->post("/products", array(
                 "headers" => [
-                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
                 "json" => $data
             ));
@@ -188,7 +188,7 @@ class Catalog extends MSController{
         try{
             $response = $this->http->get("/products", array(
                 "headers" => [
-                    "Authorization" => $this->config["auth"]["type"] . " " . $this->config["auth"]["token"]
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
                 "query" => $filters
             ));
