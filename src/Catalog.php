@@ -32,7 +32,12 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            return json_decode($body);
+            $bodyDecoded = json_decode($body);
+            
+            if($bodyDecoded->code != 200)
+                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
+            
+            return $bodyDecoded->data;
             
         } catch (Exception $ex) {
             
@@ -53,7 +58,12 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            return json_decode($body);
+            $bodyDecoded = json_decode($body);
+            
+            if($bodyDecoded->code != 200)
+                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
+            
+            return $bodyDecoded->data;
             
         } catch (Exception $ex) {
             
@@ -75,7 +85,12 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            return json_decode($body);
+            $bodyDecoded = json_decode($body);
+            
+            if($bodyDecoded->code != 200)
+                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
+            
+            return $bodyDecoded->data;
             
         } catch (Exception $ex) {
             
@@ -97,7 +112,12 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            return json_decode($body);
+            $bodyDecoded = json_decode($body);
+            
+            if($bodyDecoded->code != 200)
+                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
+            
+            return $bodyDecoded->data;
             
         } catch (Exception $ex) {
             
@@ -119,7 +139,12 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            return json_decode($body);
+            $bodyDecoded = json_decode($body);
+            
+            if($bodyDecoded->code != 200)
+                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
+            
+            return $bodyDecoded->data;
             
         } catch (Exception $ex) {
             
@@ -143,7 +168,12 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            return json_decode($body);
+            $bodyDecoded = json_decode($body);
+            
+            if($bodyDecoded->code != 200)
+                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
+            
+            return $bodyDecoded->data;
             
         } catch (Exception $ex) {
             
@@ -165,7 +195,12 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            return json_decode($body);
+            $bodyDecoded = json_decode($body);
+            
+            if($bodyDecoded->code != 200)
+                throw new Exception($bodyDecoded->errorMsg, $bodyDecoded->code);
+            
+            return $bodyDecoded->data;
             
         } catch (Exception $ex) {
             
