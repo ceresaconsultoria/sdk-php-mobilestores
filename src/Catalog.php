@@ -19,6 +19,251 @@ use MobileStores\Exceptions\MSException;
  */
 class Catalog extends MSController{
     
+    //Categories
+    
+    public function treeCategories(){
+        
+        try{
+            $response = $this->http->get("categories/tree", array(
+                "headers" => [
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    public function listCategories(array $filters = []){
+        
+        try{
+            $response = $this->http->get("categories", array(
+                "headers" => [
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    public function updateCategory($id, array $data){
+        
+        try{
+            $response = $this->http->post("categories/".$id, array(
+                "headers" => [
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    public function createCategory(array $data){
+        
+        try{
+            $response = $this->http->post("categories", array(
+                "headers" => [
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
     //Brands
     
     public function removeBrand($id){

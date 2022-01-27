@@ -24,7 +24,7 @@ class MSHttp {
     public function __construct(array $config = []) {        
         $defaultConfig = array(
             'base_uri' => $this->baseUrl,
-            'timeout' => 10,
+            'timeout' => 30,
             'headers' => array(
                 'content-type' => 'application/json'
             )
