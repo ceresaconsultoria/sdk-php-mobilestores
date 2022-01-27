@@ -571,6 +571,67 @@ class Catalog extends MSController{
     
     //Products
     
+    public function updateProduct($id, array $data){
+        
+        try{
+            $response = $this->http->post("products/".$id, array(
+                "headers" => [
+                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
     public function createProduct(array $data){
         
         try{
