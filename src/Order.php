@@ -24,10 +24,11 @@ class Order extends MSController{
     public function updateOrder($id, array $data){
         
         try{
-            $response = $this->http->post("orders", array(
+            $response = $this->http->post("orders/".$id, array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
-                ]
+                ],
+                "json" => $data
             ));
 
             $body = (string)$response->getBody();
