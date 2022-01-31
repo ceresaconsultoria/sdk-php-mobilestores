@@ -8,7 +8,12 @@
 
 namespace MobileStores;
 
+use Exception;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use MobileStores\Core\MSController;
+use MobileStores\Exceptions\MSException;
 
 /**
  * Description of Order
@@ -31,7 +36,7 @@ class Order extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -44,7 +49,7 @@ class Order extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -56,7 +61,7 @@ class Order extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
