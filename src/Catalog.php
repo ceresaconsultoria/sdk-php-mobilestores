@@ -24,7 +24,7 @@ class Catalog extends MSController{
     public function treeCategories(){
         
         try{
-            $response = $this->http->get("categories/tree", array(
+            $response = $this->http->get("api/v1/categories/tree", array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ]
@@ -84,7 +84,7 @@ class Catalog extends MSController{
     public function listCategories(array $filters = []){
         
         try{
-            $response = $this->http->get("categories", array(
+            $response = $this->http->get("api/v1/categories", array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
@@ -145,7 +145,7 @@ class Catalog extends MSController{
     public function updateCategory($id, array $data){
         
         try{
-            $response = $this->http->post("categories/".$id, array(
+            $response = $this->http->post("api/v1/categories/".$id, array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
@@ -206,7 +206,7 @@ class Catalog extends MSController{
     public function createCategory(array $data){
         
         try{
-            $response = $this->http->post("categories", array(
+            $response = $this->http->post("api/v1/categories", array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
@@ -269,7 +269,7 @@ class Catalog extends MSController{
     public function removeBrand($id){
         
         try{
-            $response = $this->http->delete("brands/".$id, array(
+            $response = $this->http->delete("api/v1/brands/".$id, array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ]
@@ -329,7 +329,7 @@ class Catalog extends MSController{
     public function getBrand($id){
         
         try{
-            $response = $this->http->get("brands/".$id, array(
+            $response = $this->http->get("api/v1/brands/".$id, array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ]
@@ -389,7 +389,7 @@ class Catalog extends MSController{
     public function listBrands(array $filters = []){
         
         try{
-            $response = $this->http->get("brands", array(
+            $response = $this->http->get("api/v1/brands", array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
@@ -450,7 +450,7 @@ class Catalog extends MSController{
     public function updateBrand($id, array $data){
         
         try{
-            $response = $this->http->post("brands/".$id, array(
+            $response = $this->http->post("api/v1/brands/".$id, array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
@@ -511,7 +511,7 @@ class Catalog extends MSController{
     public function createBrand(array $data){
         
         try{
-            $response = $this->http->post("brands", array(
+            $response = $this->http->post("api/v1/brands", array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
@@ -574,7 +574,7 @@ class Catalog extends MSController{
     public function updateProduct($id, array $data){
         
         try{
-            $response = $this->http->post("products/".$id, array(
+            $response = $this->http->post("api/v1/products/".$id, array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
@@ -635,7 +635,7 @@ class Catalog extends MSController{
     public function createProduct(array $data){
         
         try{
-            $response = $this->http->post("products", array(
+            $response = $this->http->post("api/v1/products", array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],
@@ -696,7 +696,7 @@ class Catalog extends MSController{
     public function listProducts(array $filters = []){
         
         try{
-            $response = $this->http->get("products", array(
+            $response = $this->http->get("api/v1/products", array(
                 "headers" => [
                     "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
                 ],

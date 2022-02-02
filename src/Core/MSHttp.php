@@ -19,11 +19,11 @@ class MSHttp {
     protected Client $http;
     protected $config;
 
-    private $baseUrl = "https://thirdparty.mobilestores.app/api/v1/";
+    const BASE_URL = "https://thirdparty.mobilestores.app/";
            
     public function __construct(array $config = []) {        
         $defaultConfig = array(
-            'base_uri' => $this->baseUrl,
+            'base_uri' => self::BASE_URL,
             'timeout' => 30,
             'headers' => array(
                 'content-type' => 'application/json'

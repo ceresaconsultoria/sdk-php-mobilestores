@@ -8,27 +8,18 @@
 
 namespace MobileStores;
 
-use Exception;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\ServerException;
-use MobileStores\Core\MSController;
-use MobileStores\Exceptions\MSException;
-
 /**
- * Description of Order
+ * Description of Autorization
  *
  * @author weslley
  */
-class Order extends MSController{
-    public function updateOrder($id, array $data){
+class Autorization extends Core\MSController{
+    
+    public function token(array $data){
         
         try{
-            $response = $this->http->post("api/v1/orders/".$id, array(
-                "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
-                ],
-                "json" => $data
+            $response = $this->http->post("authorize/token", array(
+                "form_params" => $data
             ));
 
             $body = (string)$response->getBody();
@@ -37,7 +28,7 @@ class Order extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (ServerException $ex) {
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -50,7 +41,7 @@ class Order extends MSController{
             }
             
             
-        } catch (ClientException $ex) {
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -62,7 +53,7 @@ class Order extends MSController{
                 
             }
             
-        } catch (BadResponseException $ex) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -79,6 +70,12 @@ class Order extends MSController{
             throw new MSException($ex);
         
         }
+        
+    }
+    
+    public function getUrlToRequest(array $data){
+        
+        return $this->http->getConfig("base_uri") . "authorize?" . http_build_query($data);
         
     }
 }
