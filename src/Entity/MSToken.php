@@ -67,12 +67,12 @@ class MSToken {
         return $this;
     }
 
-    public function setExpires_in($expirs_in) {
+    public function setExpires_in($expires_in) {
         $this->expires_in = $expires_in;        
         return $this;
     }
     
-    public function setExpire($expires) {
+    public function setExpires($expires) {
         $this->expires = $expires;        
         return $this;
     }
