@@ -22,11 +22,15 @@ use MobileStores\Exceptions\MSException;
  */
 class Order extends MSController{
     public function updateOrder($id, array $data){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->post("api/v1/orders/".$id, array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "json" => $data
             ));

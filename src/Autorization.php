@@ -13,6 +13,7 @@ use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use MobileStores\Core\MSController;
+use MobileStores\Entity\MSToken;
 use MobileStores\Exceptions\MSException;
 
 /**
@@ -22,7 +23,7 @@ use MobileStores\Exceptions\MSException;
  */
 class Autorization extends MSController{
     
-    public function token(array $data){
+    public function token(array $data) : MSToken{
         
         try{
             $response = $this->http->post("authorize/token", array(
@@ -31,7 +32,20 @@ class Autorization extends MSController{
 
             $body = (string)$response->getBody();
                         
-            return json_decode($body);
+            $token = json_decode($body);
+            
+            $msToken = new MSToken();
+            
+            $expire = time() + $token->expire_in;
+            
+            $msToken
+                ->setExpire(date("Y-m-d H:i:s", $expire))
+                ->setAccess_token($token->access_token)
+                ->setExpire_in($token->expire_in)
+                ->setRefresh_token($token->refresh_token)
+                ->setToken_type($token->token_type);
+            
+            return $msToken;
             
         } catch (ServerException $ex) {
             

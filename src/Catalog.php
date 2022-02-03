@@ -9,8 +9,12 @@
 namespace MobileStores;
 
 use Exception;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use MobileStores\Core\MSController;
 use MobileStores\Exceptions\MSException;
+use MobileStores\Exceptions\MSTokenException;
 
 /**
  * Description of Catalog
@@ -22,11 +26,15 @@ class Catalog extends MSController{
     //Categories
     
     public function treeCategories(){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->get("api/v1/categories/tree", array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ]
             ));
 
@@ -36,7 +44,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -49,7 +57,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -61,7 +69,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -82,11 +90,15 @@ class Catalog extends MSController{
     }
     
     public function listCategories(array $filters = []){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->get("api/v1/categories", array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "query" => $filters
             ));
@@ -97,7 +109,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -110,7 +122,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -122,7 +134,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -143,11 +155,15 @@ class Catalog extends MSController{
     }
     
     public function updateCategory($id, array $data){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->post("api/v1/categories/".$id, array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "json" => $data
             ));
@@ -158,7 +174,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -171,7 +187,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -183,7 +199,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -204,11 +220,15 @@ class Catalog extends MSController{
     }
     
     public function createCategory(array $data){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->post("api/v1/categories", array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "json" => $data
             ));
@@ -219,7 +239,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -232,7 +252,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -244,7 +264,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -267,11 +287,15 @@ class Catalog extends MSController{
     //Brands
     
     public function removeBrand($id){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->delete("api/v1/brands/".$id, array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ]
             ));
 
@@ -281,7 +305,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -294,7 +318,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -306,7 +330,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -327,11 +351,15 @@ class Catalog extends MSController{
     }
     
     public function getBrand($id){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->get("api/v1/brands/".$id, array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ]
             ));
 
@@ -341,7 +369,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -354,7 +382,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -366,7 +394,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -387,11 +415,15 @@ class Catalog extends MSController{
     }
     
     public function listBrands(array $filters = []){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->get("api/v1/brands", array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "query" => $filters
             ));
@@ -402,7 +434,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -415,7 +447,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -427,7 +459,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -448,11 +480,15 @@ class Catalog extends MSController{
     }
     
     public function updateBrand($id, array $data){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->post("api/v1/brands/".$id, array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "json" => $data
             ));
@@ -463,7 +499,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -476,7 +512,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -488,7 +524,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -509,11 +545,15 @@ class Catalog extends MSController{
     }
     
     public function createBrand(array $data){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->post("api/v1/brands", array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "json" => $data
             ));
@@ -524,7 +564,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -537,7 +577,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -549,7 +589,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -572,11 +612,15 @@ class Catalog extends MSController{
     //Products
     
     public function updateProduct($id, array $data){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->post("api/v1/products/".$id, array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "json" => $data
             ));
@@ -587,7 +631,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -600,7 +644,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -612,7 +656,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -633,11 +677,15 @@ class Catalog extends MSController{
     }
     
     public function createProduct(array $data){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->post("api/v1/products", array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "json" => $data
             ));
@@ -648,7 +696,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -661,7 +709,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -673,7 +721,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -694,11 +742,15 @@ class Catalog extends MSController{
     }
     
     public function listProducts(array $filters = []){
+        if($this->getToken()->expired()){
+            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            throw new MSTokenException("Token expirado", 1);
+        }
         
         try{
             $response = $this->http->get("api/v1/products", array(
                 "headers" => [
-                    "Authorization" => $this->config["msAuth"]["type"] . " " . $this->config["msAuth"]["token"]
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "query" => $filters
             ));
@@ -709,7 +761,7 @@ class Catalog extends MSController{
                         
             return $bodyDecoded->data;
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -722,7 +774,7 @@ class Catalog extends MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -734,7 +786,7 @@ class Catalog extends MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
