@@ -32,7 +32,15 @@ class Autorization extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $token = json_decode($body);
+            $responseApi = json_decode($body);
+            
+            if(empty($responseApi) || !is_object($responseApi))
+                throw new MSTokenException("Resposta desconhecida do servidor", 1);
+            
+            if($responseApi->code != 200)
+                throw new MSTokenException($responseApi->errorMsg, 1);
+            
+            $token = $responseApi->data;
             
             $msToken = new MSToken();
             
