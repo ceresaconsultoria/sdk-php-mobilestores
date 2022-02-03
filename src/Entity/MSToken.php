@@ -27,7 +27,7 @@ class MSToken {
     public function expired(){
         $now = strtotime(date("Y-m-d H:i:s"));
                 
-        if($now > strtotime($this->getExpire()))
+        if($now > strtotime($this->getExpires()))
             return self::VALID_REFRESH_TOKEN;
         
         return self::VALID;
