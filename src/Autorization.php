@@ -24,9 +24,7 @@ class Autorization extends Core\MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
-                        
-            return $bodyDecoded->data;
+            return json_decode($body);
             
         } catch (\GuzzleHttp\Exception\ServerException $ex) {
             
