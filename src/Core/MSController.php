@@ -18,14 +18,10 @@ use MobileStores\Entity\MSToken;
 class MSController extends MSHttp{
     protected MSToken $token;
     
-    const EVENT_TOKEN_EXPIRED = "tokenExpired";
-    
-    private $events;
-    
     public function __construct(array $config = []) {        
         parent::__construct($config);
         
-        $this->resetEvents();
+        MSEventDispatcher::autoListenners();
     }
     
     public function setToken(MSToken $token){
@@ -35,19 +31,5 @@ class MSController extends MSHttp{
     
     public function getToken() : MSToken{
         return $this->token;
-    }
-    
-    public function on($eventName, $callback){
-        if(!isset($this->events[$eventName]))
-            $this->events[$eventName] = $callback;
-    }
-    
-    public function resetEvents(){
-        $this->events = [];
-    }
-    
-    protected function triggerEvent($eventName, array $data = null){
-        if(!isset($this->events[$eventName]))
-            $this->events[$eventName]($data);
     }
 }

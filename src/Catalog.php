@@ -27,7 +27,10 @@ class Catalog extends MSController{
     
     public function treeCategories(){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
