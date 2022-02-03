@@ -44,12 +44,12 @@ class Autorization extends MSController{
             
             $msToken = new MSToken();
             
-            $expire = time() + $token->expire_in;
+            $expires = time() + $token->expires_in;
             
             $msToken
-                ->setExpire(date("Y-m-d H:i:s", $expire))
+                ->setExpires(date("Y-m-d H:i:s", $expires))
                 ->setAccess_token($token->access_token)
-                ->setExpire_in($token->expire_in)
+                ->setExpires_in($token->expires_in)
                 ->setRefresh_token($token->refresh_token)
                 ->setToken_type($token->token_type);
             

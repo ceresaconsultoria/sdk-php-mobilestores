@@ -16,8 +16,8 @@ namespace MobileStores\Entity;
 class MSToken {
     private $store_id;
     private $access_token;
-    private $expire_in;
-    private $expire;
+    private $expires_in;
+    private $expires;
     private $refresh_token;
     private $token_type;
     
@@ -41,12 +41,12 @@ class MSToken {
         return $this->access_token;
     }
 
-    public function getExpire_in() {
-        return $this->expire_in;
+    public function getExpires_in() {
+        return $this->expires_in;
     }
 
-    public function getExpire() {
-        return $this->expire;
+    public function getExpires() {
+        return $this->expires;
     }
 
     public function getRefresh_token() {
@@ -67,13 +67,13 @@ class MSToken {
         return $this;
     }
 
-    public function setExpire_in($expire_in) {
-        $this->expire_in = $expire_in;        
+    public function setExpires_in($expirs_in) {
+        $this->expires_in = $expires_in;        
         return $this;
     }
     
-    public function setExpire($expire) {
-        $this->expire = $expire;        
+    public function setExpire($expires) {
+        $this->expires = $expires;        
         return $this;
     }
 
