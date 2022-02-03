@@ -21,7 +21,7 @@ class MSController extends MSHttp{
     public function __construct(array $config = []) {        
         parent::__construct($config);
         
-        MSEventDispatcher::autoListenners();
+        MSEventDispatcher::getDispatcher();
     }
     
     public function setToken(MSToken $token){

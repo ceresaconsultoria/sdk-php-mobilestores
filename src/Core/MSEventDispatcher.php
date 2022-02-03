@@ -16,7 +16,6 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @author weslley
  */
 class MSEventDispatcher {
-    
     private static $dispatcher;
     
     public static function getDispatcher() : EventDispatcher{
@@ -25,20 +24,5 @@ class MSEventDispatcher {
         }
         
         return self::$dispatcher;
-    }
-    
-    public static function autoListenners(){
-        $dispatcher = self::getDispatcher();
-        
-        $fileListenners = scandir(__DIR__ . "/../Events/Listenners");
-        $fileListenners = array_diff($fileListenners, array('.', '..'));
-
-        foreach($fileListenners as $listenerTrigger){
-            $listenerTriggerClassName = str_replace(".php", "", $listenerTrigger);                    
-
-            $listenerTriggerClass = "\\MobileStores\\Events\Listenners\\". $listenerTriggerClassName;
-            
-            $dispatcher->addListener($listenerTriggerClass::EVENT, [new $listenerTriggerClass(), "execute"]);
-        }
     }
 }
