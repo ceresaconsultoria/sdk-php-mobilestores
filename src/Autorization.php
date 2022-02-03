@@ -8,12 +8,19 @@
 
 namespace MobileStores;
 
+use Exception;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
+use MobileStores\Core\MSController;
+use MobileStores\Exceptions\MSException;
+
 /**
  * Description of Autorization
  *
  * @author weslley
  */
-class Autorization extends Core\MSController{
+class Autorization extends MSController{
     
     public function token(array $data){
         
@@ -26,7 +33,7 @@ class Autorization extends Core\MSController{
                         
             return json_decode($body);
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -39,7 +46,7 @@ class Autorization extends Core\MSController{
             }
             
             
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
@@ -51,7 +58,7 @@ class Autorization extends Core\MSController{
                 
             }
             
-        } catch (\GuzzleHttp\Exception\BadResponseException $ex) {
+        } catch (BadResponseException $ex) {
             
             $body = (string)$ex->getResponse()->getBody();
             
