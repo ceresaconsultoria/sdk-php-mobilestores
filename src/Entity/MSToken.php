@@ -86,4 +86,8 @@ class MSToken {
         $this->token_type = $token_type;
         return $this;
     }
+    
+    public function toArray(){
+        return get_object_vars($this);
+    }
 }
