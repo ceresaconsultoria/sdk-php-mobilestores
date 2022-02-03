@@ -21,16 +21,13 @@ class MSToken {
     private $refresh_token;
     private $token_type;
     
-    const VALID = 1;
-    const VALID_REFRESH_TOKEN = 2;
-    
     public function expired(){
         $now = strtotime(date("Y-m-d H:i:s"));
                 
         if($now > strtotime($this->getExpires()))
-            return self::VALID_REFRESH_TOKEN;
+            return true;
         
-        return self::VALID;
+        return false;
     }
     
     public function getStore_id() {
