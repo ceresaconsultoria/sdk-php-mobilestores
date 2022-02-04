@@ -22,8 +22,11 @@ use MobileStores\Exceptions\MSException;
  */
 class Order extends MSController{
     public function updateOrder($id, array $data){
-        if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+        if($this->getToken()->expired()){ 
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         

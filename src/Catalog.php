@@ -94,7 +94,10 @@ class Catalog extends MSController{
     
     public function listCategories(array $filters = []){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -159,7 +162,10 @@ class Catalog extends MSController{
     
     public function updateCategory($id, array $data){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -224,7 +230,10 @@ class Catalog extends MSController{
     
     public function createCategory(array $data){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -291,7 +300,10 @@ class Catalog extends MSController{
     
     public function removeBrand($id){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -355,7 +367,10 @@ class Catalog extends MSController{
     
     public function getBrand($id){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -419,7 +434,10 @@ class Catalog extends MSController{
     
     public function listBrands(array $filters = []){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -484,7 +502,10 @@ class Catalog extends MSController{
     
     public function updateBrand($id, array $data){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -549,7 +570,10 @@ class Catalog extends MSController{
     
     public function createBrand(array $data){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -616,7 +640,10 @@ class Catalog extends MSController{
     
     public function updateProduct($id, array $data){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -681,7 +708,10 @@ class Catalog extends MSController{
     
     public function createProduct(array $data){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
@@ -746,7 +776,10 @@ class Catalog extends MSController{
     
     public function listProducts(array $filters = []){
         if($this->getToken()->expired()){
-            $this->triggerEvent(self::EVENT_TOKEN_EXPIRED);
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
             throw new MSTokenException("Token expirado", 1);
         }
         
