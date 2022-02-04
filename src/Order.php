@@ -14,6 +14,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use MobileStores\Core\MSController;
 use MobileStores\Exceptions\MSException;
+use MobileStores\Exceptions\MSTokenException;
 
 /**
  * Description of Order
