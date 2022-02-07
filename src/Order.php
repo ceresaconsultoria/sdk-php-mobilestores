@@ -24,7 +24,7 @@ use MobileStores\Exceptions\MSTokenException;
 class Order extends MSController{
     
     public function createPayment($orderId, array $data){ 
-        if($this->getToken()->expired()){ 
+        if($this->getToken()->expired()){  
             $eventTokenExpired = new Events\TokenExpired(null);
             
             Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
