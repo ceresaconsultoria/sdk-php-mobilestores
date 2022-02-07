@@ -35,7 +35,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->get("api/v1/categories/tree", array(
+            $response = $this->http->get("api/v1/category/tree", array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ]
@@ -102,7 +102,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->get("api/v1/categories", array(
+            $response = $this->http->get("api/v1/category", array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
@@ -170,7 +170,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->post("api/v1/categories/".$id, array(
+            $response = $this->http->post("api/v1/category/".$id, array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
@@ -238,7 +238,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->post("api/v1/categories", array(
+            $response = $this->http->post("api/v1/category", array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
@@ -308,7 +308,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->delete("api/v1/brands/".$id, array(
+            $response = $this->http->delete("api/v1/brand/".$id, array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ]
@@ -375,7 +375,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->get("api/v1/brands/".$id, array(
+            $response = $this->http->get("api/v1/brand/".$id, array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ]
@@ -442,7 +442,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->get("api/v1/brands", array(
+            $response = $this->http->get("api/v1/brand", array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
@@ -510,7 +510,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->post("api/v1/brands/".$id, array(
+            $response = $this->http->post("api/v1/brand/".$id, array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
@@ -578,7 +578,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->post("api/v1/brands", array(
+            $response = $this->http->post("api/v1/brand", array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
@@ -648,7 +648,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->post("api/v1/products/".$id, array(
+            $response = $this->http->post("api/v1/product/".$id, array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
@@ -716,7 +716,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->post("api/v1/products", array(
+            $response = $this->http->post("api/v1/product", array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
@@ -784,7 +784,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->get("api/v1/products", array(
+            $response = $this->http->get("api/v1/product", array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
