@@ -91,6 +91,74 @@ class Order extends MSController{
         
     }
     
+    public function cancelOrder($id, array $data){
+        if($this->getToken()->expired()){ 
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post(sprintf("api/v1/order/%s/cancel", $id), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
     public function updateOrder($id, array $data){
         if($this->getToken()->expired()){ 
             $eventTokenExpired = new Events\TokenExpired(null);
