@@ -22,6 +22,478 @@ use MobileStores\Exceptions\MSTokenException;
  * @author weslley
  */
 class Catalog extends MSController{
+    //Variants
+    
+    public function listVariants($productId, array $filters = []){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->get(sprintf("api/v1/product/%s/variant", $productId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function createVariant($productId, array $data){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post(sprintf("api/v1/product/%s/variant", $productId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function updateVariant($productId, $variantId, array $filters = []){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->get(sprintf("api/v1/product/%s/variant/%s", $productId, $variantId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    //Properties
+    
+    public function listProperties(array $filters = []){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->get("api/v1/property", array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function createProperty(array $data){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post("api/v1/property", array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function listPropertyValues($propertyId, array $filters = []){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->get(sprintf("api/v1/property/%s/values", $propertyId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function createPropertyValue($propertyId, array $data){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post(sprintf("api/v1/property/%s/values", $propertyId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = json_decode($body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+    }
     
     //Categories
     
