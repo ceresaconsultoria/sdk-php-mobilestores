@@ -33,7 +33,7 @@ class Order extends MSController{
         }
         
         try{
-            $response = $this->http->post(sprinf("api/v1/order/%s/payment", $orderId), array(
+            $response = $this->http->post(sprintf("api/v1/order/%s/payment", $orderId), array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
