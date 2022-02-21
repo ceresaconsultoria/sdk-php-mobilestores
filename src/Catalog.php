@@ -371,7 +371,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->get(sprintf("api/v1/property/%s/values", $propertyId), array(
+            $response = $this->http->get(sprintf("api/v1/property/%s/value", $propertyId), array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
@@ -438,7 +438,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->post(sprintf("api/v1/property/%s/values", $propertyId), array(
+            $response = $this->http->post(sprintf("api/v1/property/%s/value", $propertyId), array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
