@@ -168,7 +168,7 @@ class Catalog extends MSController{
         }
         
         try{
-            $response = $this->http->get(sprintf("api/v1/product/%s/variant/%s", $productId, $variantId), array(
+            $response = $this->http->post(sprintf("api/v1/product/%s/variant/%s", $productId, $variantId), array(
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
