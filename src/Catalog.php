@@ -1196,8 +1196,10 @@ class Catalog extends MSController{
             ));
 
             $body = (string)$response->getBody();
+            
+            var_dump($body);
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
             
             if(empty($bodyDecoded))
                 throw new Exception("Server not reponse JSON, response: " . $body);
