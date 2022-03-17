@@ -1197,7 +1197,8 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
             
-            var_dump($body);
+            var_dump("asdasdasdasd");
+            var_dump($body);exit;
                         
             $bodyDecoded = @json_decode($body);
             
