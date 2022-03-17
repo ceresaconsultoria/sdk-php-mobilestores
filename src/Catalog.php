@@ -44,7 +44,7 @@ class Catalog extends MSController{
             $body = (string)$response->getBody();
                         
             $bodyDecoded = json_decode($body);
-                        
+
             return $bodyDecoded->data;
             
         } catch (ServerException $ex) {
@@ -1198,6 +1198,9 @@ class Catalog extends MSController{
             $body = (string)$response->getBody();
                         
             $bodyDecoded = json_decode($body);
+            
+            if(empty($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
