@@ -42,7 +42,10 @@ class Order extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -110,7 +113,10 @@ class Order extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -178,7 +184,10 @@ class Order extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             

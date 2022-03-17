@@ -43,7 +43,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
 
             return $bodyDecoded->data;
             
@@ -110,7 +113,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -177,7 +183,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -246,7 +255,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -313,7 +325,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -380,7 +395,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -447,7 +465,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -515,7 +536,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -583,7 +607,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -651,7 +678,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -719,7 +749,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -788,7 +821,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -855,7 +891,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -923,7 +962,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -991,7 +1033,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -1059,7 +1104,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -1129,7 +1177,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
@@ -1196,13 +1247,10 @@ class Catalog extends MSController{
             ));
 
             $body = (string)$response->getBody();
-            
-            var_dump("asdasdasdasd");
-            var_dump($body);exit;
                         
             $bodyDecoded = @json_decode($body);
             
-            if(empty($bodyDecoded))
+            if(!is_object($bodyDecoded))
                 throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
@@ -1271,7 +1319,10 @@ class Catalog extends MSController{
 
             $body = (string)$response->getBody();
                         
-            $bodyDecoded = json_decode($body);
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
                         
             return $bodyDecoded->data;
             
