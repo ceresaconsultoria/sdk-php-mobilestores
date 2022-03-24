@@ -23,6 +23,76 @@ use MobileStores\Exceptions\MSTokenException;
  */
 class Order extends MSController{
     
+    public function orderDetails($id){
+        if($this->getToken()->expired()){ 
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->get(sprintf("api/v1/order/%s", $id), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+            
+        } catch (ClientException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (BadResponseException $ex) {
+            
+            $body = (string)$ex->getResponse()->getBody();
+            
+            $bodyDecoded = json_decode($body);
+            
+            if(isset($bodyDecoded->errorMsg)){
+                
+                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+                
+            }
+            
+        } catch (Exception $ex) {
+                 
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
     public function createPayment($orderId, array $data){ 
         if($this->getToken()->expired()){  
             $eventTokenExpired = new Events\TokenExpired(null);
