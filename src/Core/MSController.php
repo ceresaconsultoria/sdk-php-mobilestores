@@ -69,7 +69,7 @@ class MSController extends MSHttp{
         if($problemaToken){
             $eventTokenExpired = new \MobileStores\Events\TokenExpired(null);
             
-            MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, \MobileStores\Events\TokenExpired::NAME);
 
             throw new MSTokenException("Token expirado", 1);
         }        
