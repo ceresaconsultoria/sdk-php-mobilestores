@@ -53,9 +53,15 @@ class MSController extends MSHttp{
     protected function checkTokenExpired($message){
         $problemaToken = false;
         
-        $message = strtolower($message);
+        if(preg_match("/Token inválido/", $message)){
+            $problemaToken = true;
+        }
         
-        if(strpos($message, "token") !== false){
+        if(preg_match("/Token expirado/", $message)){
+            $problemaToken = true;
+        }
+
+        if(preg_match("/Access token could not be verified/", $message)){
             $problemaToken = true;
         }
         
