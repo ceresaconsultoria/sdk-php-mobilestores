@@ -51,43 +51,20 @@ class Webhook extends MSController{
             
         } catch (ServerException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
-            
+            $this->exceptionProcess($ex);
             
         } catch (ClientException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (BadResponseException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (Exception $ex) {
                  
+            $this->checkTokenExpired($ex->getMessage());
+            
             throw new MSException($ex);
         
         }
@@ -122,43 +99,20 @@ class Webhook extends MSController{
             
         } catch (ServerException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
-            
+            $this->exceptionProcess($ex);
             
         } catch (ClientException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (BadResponseException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (Exception $ex) {
                  
+            $this->checkTokenExpired($ex->getMessage());
+            
             throw new MSException($ex);
         
         }
@@ -192,43 +146,20 @@ class Webhook extends MSController{
             
         } catch (ServerException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
-            
+            $this->exceptionProcess($ex);
             
         } catch (ClientException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (BadResponseException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (Exception $ex) {
                  
+            $this->checkTokenExpired($ex->getMessage());
+            
             throw new MSException($ex);
         
         }
@@ -262,43 +193,20 @@ class Webhook extends MSController{
             
         } catch (ServerException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
-            
+            $this->exceptionProcess($ex);
             
         } catch (ClientException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (BadResponseException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (Exception $ex) {
                  
+            $this->checkTokenExpired($ex->getMessage());
+            
             throw new MSException($ex);
         
         }
@@ -333,43 +241,20 @@ class Webhook extends MSController{
             
         } catch (ServerException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
-            
+            $this->exceptionProcess($ex);
             
         } catch (ClientException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (BadResponseException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (Exception $ex) {
                  
+            $this->checkTokenExpired($ex->getMessage());
+            
             throw new MSException($ex);
         
         }
@@ -404,43 +289,20 @@ class Webhook extends MSController{
             
         } catch (ServerException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
-            
+            $this->exceptionProcess($ex);
             
         } catch (ClientException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (BadResponseException $ex) {
             
-            $body = (string)$ex->getResponse()->getBody();
-            
-            $bodyDecoded = json_decode($body);
-            
-            if(isset($bodyDecoded->errorMsg)){
-                
-                throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
-                
-            }
+            $this->exceptionProcess($ex);
             
         } catch (Exception $ex) {
                  
+            $this->checkTokenExpired($ex->getMessage());
+            
             throw new MSException($ex);
         
         }

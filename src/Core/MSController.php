@@ -32,4 +32,46 @@ class MSController extends MSHttp{
     public function getToken() : MSToken{
         return $this->token;
     }
+    
+    protected function exceptionProcess($ex){
+        $body = (string)$ex->getResponse()->getBody();
+        
+        $this->checkTokenExpired($body);
+            
+        $bodyDecoded = json_decode($body);
+
+        if(isset($bodyDecoded->errorMsg)){
+
+            throw MSException::fromObjectMessage($bodyDecoded->errorMsg, $bodyDecoded->code, $ex->getPrevious());
+
+        }
+    }
+    
+    protected function checkTokenExpired($message){
+        $problemaToken = false;
+        
+        if(preg_match("/Token inválido/i", $message)){
+            $problemaToken = true;
+        }
+        
+        if(preg_match("/Token expirado/i", $message)){
+            $problemaToken = true;
+        }
+
+        if(preg_match("/Connection refused/i", $message)){
+            $problemaToken = true;
+        }
+
+        if(preg_match("/Access token could not be verified/i", $message)){
+            $problemaToken = true;
+        }
+        
+        if($problemaToken){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+
+            throw new MSTokenException("Token expirado", 1);
+        }        
+    }
 }
