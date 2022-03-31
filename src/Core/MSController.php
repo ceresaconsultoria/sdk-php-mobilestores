@@ -9,6 +9,9 @@
 namespace MobileStores\Core;
 
 use MobileStores\Entity\MSToken;
+use MobileStores\Events\TokenExpired;
+use MobileStores\Exceptions\MSException;
+use MobileStores\Exceptions\MSTokenException;
 
 /**
  * Description of MSController
@@ -67,9 +70,9 @@ class MSController extends MSHttp{
         }
         
         if($problemaToken){
-            $eventTokenExpired = new \MobileStores\Events\TokenExpired(null);
+            $eventTokenExpired = new TokenExpired(null);
             
-            MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, \MobileStores\Events\TokenExpired::NAME);
+            MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, TokenExpired::NAME);
 
             throw new MSTokenException("Token expirado", 1);
         }        
