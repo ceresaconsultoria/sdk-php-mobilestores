@@ -25,7 +25,7 @@ class Catalog extends MSController{
     
     //Variants
     
-    public function updateVariantStock($productId, $variantId, array $filters = []){
+    public function updateVariantStock($productId, $variantId, array $data){
         if($this->getToken()->expired()){
             $eventTokenExpired = new Events\TokenExpired(null);
             
@@ -39,7 +39,7 @@ class Catalog extends MSController{
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
-                "query" => $filters
+                "json" => $data
             ));
 
             $body = (string)$response->getBody();
@@ -72,7 +72,7 @@ class Catalog extends MSController{
         }
     }
     
-    public function updateVariantPrice($productId, $variantId, array $filters = []){
+    public function updateVariantPrice($productId, $variantId, array $data){
         if($this->getToken()->expired()){
             $eventTokenExpired = new Events\TokenExpired(null);
             
@@ -86,7 +86,7 @@ class Catalog extends MSController{
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
-                "query" => $filters
+                "json" => $data
             ));
 
             $body = (string)$response->getBody();
@@ -213,7 +213,7 @@ class Catalog extends MSController{
         }
     }
     
-    public function updateVariant($productId, $variantId, array $filters = []){
+    public function updateVariant($productId, $variantId, array $data){
         if($this->getToken()->expired()){
             $eventTokenExpired = new Events\TokenExpired(null);
             
@@ -227,7 +227,7 @@ class Catalog extends MSController{
                 "headers" => [
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
-                "query" => $filters
+                "json" => $data
             ));
 
             $body = (string)$response->getBody();
