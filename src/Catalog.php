@@ -22,7 +22,102 @@ use MobileStores\Exceptions\MSTokenException;
  * @author weslley
  */
 class Catalog extends MSController{
+    
     //Variants
+    
+    public function updateVariantStock($productId, $variantId, array $filters = []){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post(sprintf("api/v1/product/%s/variant/%s/stock", $productId, $variantId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function updateVariantPrice($productId, $variantId, array $filters = []){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post(sprintf("api/v1/product/%s/variant/%s/price", $productId, $variantId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
     
     public function listVariants($productId, array $filters = []){
         if($this->getToken()->expired()){
@@ -789,6 +884,102 @@ class Catalog extends MSController{
     }
     
     //Products
+    
+    public function updateProductPrice($id, array $data){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post("api/v1/product/".$id."/price", array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    public function updateProductStock($id, array $data){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post("api/v1/product/".$id."/stock", array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+        
+    }
     
     public function updateProduct($id, array $data){
         if($this->getToken()->expired()){
