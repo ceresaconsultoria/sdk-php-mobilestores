@@ -11,10 +11,12 @@ namespace MobileStores;
 use Exception;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use MobileStores\Core\MSController;
 use MobileStores\Entity\MSToken;
 use MobileStores\Exceptions\MSException;
+use MobileStores\Exceptions\MSTokenException;
 
 /**
  * Description of Autorization
@@ -64,6 +66,10 @@ class Autorization extends MSController{
             $this->exceptionProcess($ex);
             
         } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (RequestException $ex) {
             
             $this->exceptionProcess($ex);
             
