@@ -49,7 +49,7 @@ class MSController extends MSHttp{
 
         }
         
-        throw MSException::fromObjectMessage(json_encode($body), 400, $ex->getPrevious());
+        throw MSException::fromObjectMessage($body, 400, $ex->getPrevious());
     }
     
     protected function checkTokenExpired($message){
