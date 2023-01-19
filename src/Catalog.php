@@ -23,6 +23,292 @@ use MobileStores\Exceptions\MSTokenException;
  */
 class Catalog extends MSController{
     
+    //Addional Informations Options
+    
+    public function updateAdditionalInformationOption($additionalInformationId, $additionalInformationOptionId, array $data){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post(sprintf('api/v1/addtional-information/%s/option/%s', $additionalInformationId, $additionalInformationOptionId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function createAdditionalInformationOption($additionalInformationId, array $data){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post(sprintf('api/v1/addtional-information/%s/option', $additionalInformationId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function listAdditionalInformationOptions($additionalInformationId, array $filters = []){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->get(sprintf('api/v1/addtional-information/%s/option', $additionalInformationId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    //Addional Informations
+    
+    public function updateAdditionalInformation($id, array $data){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post(sprintf("api/v1/addtional-information/%s", $id), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function createAdditionalInformation(array $data){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post('api/v1/addtional-information', array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
+    
+    public function listAdditionalInformations(array $filters = []){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->get('api/v1/addtional-information', array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
+    
     //Variants
     
     public function updateVariantStock($productId, $variantId, array $data){
