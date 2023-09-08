@@ -257,6 +257,53 @@ class Order extends MSController{
         
     }
     
+    public function updatePayment($orderId, $paymentOrderId, array $data){
+        if($this->getToken()->expired()){  
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->post(sprintf("api/v1/order/%s/payment/%s", $orderId, $paymentOrderId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
+    
     public function cancelOrder($id, array $data){
         if($this->getToken()->expired()){ 
             $eventTokenExpired = new Events\TokenExpired(null);
