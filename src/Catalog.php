@@ -546,6 +546,52 @@ class Catalog extends MSController{
         }
     }
     
+    public function deleteVariant($productId, $variantId){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->delete(sprintf("api/v1/product/%s/variant/%s", $productId, $variantId), array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+    }
+    
     //Properties
     
     public function listProperties(array $filters = []){
@@ -1234,6 +1280,53 @@ class Catalog extends MSController{
                     "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
                 ],
                 "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            $bodyDecoded = @json_decode($body);
+            
+            if(!is_object($bodyDecoded))
+                throw new Exception("Server not reponse JSON, response: " . $body);
+                        
+            return $bodyDecoded->data;
+            
+        } catch (ServerException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (ClientException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (BadResponseException $ex) {
+            
+            $this->exceptionProcess($ex);
+            
+        } catch (Exception $ex) {
+                 
+            $this->checkTokenExpired($ex->getMessage());
+            
+            throw new MSException($ex);
+        
+        }
+        
+    }
+    
+    public function deleteProduct($id){
+        if($this->getToken()->expired()){
+            $eventTokenExpired = new Events\TokenExpired(null);
+            
+            Core\MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, Events\TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
+        
+        try{
+            $response = $this->http->delete("api/v1/product/".$id, array(
+                "headers" => [
+                    "Authorization" => $this->getToken()->getToken_type() . " " . $this->getToken()->getAccess_token()
+                ],
             ));
 
             $body = (string)$response->getBody();
