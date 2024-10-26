@@ -55,7 +55,7 @@ class MSController extends MSHttp{
     protected function checkTokenExpired($message){
         $problemaToken = false;
                 
-        if(preg_match("/Token inválido|inv\u00e1lido|inexistente/i", $message)){
+        if(preg_match("/Token inválido|inv\x{00e1}lido|inexistente/i", $message)){
             $problemaToken = true;
         }
         
@@ -74,5 +74,19 @@ class MSController extends MSHttp{
 
             throw new MSTokenException("Token expirado", 1);
         }        
+    }
+    
+    protected function validToken(){
+        if(!$this->getToken()){
+            throw new MSTokenException("Token não informado", 1);
+        }
+        
+        if($this->getToken()->expired()){ 
+            $eventTokenExpired = new TokenExpired(null);
+            
+            MSEventDispatcher::getDispatcher()->dispatch($eventTokenExpired, TokenExpired::NAME);
+            
+            throw new MSTokenException("Token expirado", 1);
+        }
     }
 }

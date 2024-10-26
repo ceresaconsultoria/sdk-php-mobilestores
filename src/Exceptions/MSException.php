@@ -18,7 +18,7 @@ use Exception;
 class MSException extends Exception{
     
     public function __construct(Exception $ex) {
-        $message = $ex->getMessage() . PHP_EOL . $ex->getTraceAsString();        
+        $message = $ex->getMessage();
         parent::__construct($message, $ex->getCode(), $ex->getPrevious());
     }
     
@@ -47,6 +47,10 @@ class MSException extends Exception{
             
         }
         
+    }
+    
+    public function getMessageFull(){
+        return $this->getMessage() . PHP_EOL . $this->getTraceAsString();  
     }
     
 }
